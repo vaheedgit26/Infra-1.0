@@ -43,11 +43,7 @@ resource "aws_subnet" "public" {
     {
       Name = "${local.resource_name}-public-subnet-${local.azs[count.index]}"
     },
-
-    var.eks_cluster_name != null ? {
-      "kubernetes.io/role/elb"                           = "1"          # For external facing ALB
-      "kubernetes.io/cluster/${var.eks_cluster_name}"    = "owned"      # "shared"
-    } : {}
+    var.vpc_eks_tags
   )
 
   depends_on = [aws_vpc.vpc]
@@ -63,17 +59,12 @@ resource "aws_subnet" "private" {
   availability_zone       = local.azs[count.index]
   map_public_ip_on_launch = false
 
-
   tags = merge(
     var.common_tags,
     {
       Name = "${local.resource_name}-private-subnet-${local.azs[count.index]}"
     },
-
-    var.eks_cluster_name != null ? {
-      "kubernetes.io/role/internal-elb"               = "1"       # For internal facing ALB
-      "kubernetes.io/cluster/${var.eks_cluster_name}" = "owned"   # "shared"
-    } : {}
+    var.vpc_eks_tags
   )
   depends_on = [aws_vpc.vpc]
 }
