@@ -2,8 +2,8 @@ output "project" { value = var.project }
 output "env"     { value = var.env }
 
 output "vpc_id"             { value = aws_vpc.vpc.id }
-output "vpc_cidr"           { value = var.vpc_cidr }
-output "availability_zones" { value = local.azs }
+output "vpc_cidr"           { value = var.vpc_cidr   }
+output "availability_zones" { value = local.azs      }
 
 output "public_subnet_cidr"   { value = var.public_subnet_cidr }
 output "private_subnet_cidr"  { value = var.private_subnet_cidr }
