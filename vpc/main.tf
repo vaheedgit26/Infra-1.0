@@ -45,7 +45,6 @@ resource "aws_subnet" "public" {
     },
     var.vpc_eks_tags
   )
-
   depends_on = [aws_vpc.vpc]
 }
 
