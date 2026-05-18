@@ -13,7 +13,12 @@ variable "common_tags" {
   default = {} 
 }
 
-variable "vpc_eks_tags" {
+variable "eks_vpc_public_subnet_tags" {
+  type = map
+  default = {}
+}
+
+variable "eks_vpc_private_subnet_tags" {
   type = map
   default = {}
 }
