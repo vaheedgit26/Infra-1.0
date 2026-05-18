@@ -42,7 +42,8 @@ resource "aws_subnet" "public" {
     {
       Name = "${local.resource_name}-public-subnet-${local.azs[count.index]}"
     },
-    var.vpc_eks_tags
+    var.eks_vpc_public_subnet_tags,
+    var.eks_vpc_private_subnet_tags
   )
   depends_on = [aws_vpc.vpc]
 }
