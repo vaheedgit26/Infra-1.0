@@ -37,7 +37,6 @@ resource "aws_subnet" "public" {
   availability_zone       = local.azs[count.index]
   map_public_ip_on_launch = var.map_public_ip_on_launch
 
-
   tags = merge(
     var.common_tags,
     {
