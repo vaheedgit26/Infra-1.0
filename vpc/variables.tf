@@ -13,6 +13,12 @@ variable "vpc_count" {
 # Tag related variable
 variable "common_tags" {
   type = map
+  default = {} 
+}
+
+variable "vpc_tags" {
+  type = map
+  default = {}
 }
 
 variable "create_nat_gateway" { 
