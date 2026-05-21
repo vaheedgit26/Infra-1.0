@@ -87,7 +87,7 @@ variable "database_subnet_count" {
 }
 
 variable "public_subnet_cidr" {
-  type = list(any)
+  type = list(string)
 
   validation {
     condition     = length(var.public_subnet_cidr) > 0 && length(var.public_subnet_cidr) == var.public_subnet_count && length(var.public_subnet_cidr) <= var.max_azs
@@ -96,7 +96,7 @@ variable "public_subnet_cidr" {
 }
 
 variable "private_subnet_cidr" {
-  type = list(any)
+  type = list(string)
 
   validation {
     condition     = length(var.private_subnet_cidr) > 0 && length(var.private_subnet_cidr) == var.private_subnet_count && length(var.private_subnet_cidr) <= var.max_azs
@@ -105,7 +105,7 @@ variable "private_subnet_cidr" {
 }
 
 variable "database_subnet_cidr" {
-  type = list(any)
+  type = list(string)
 
   validation {
     condition     = length(var.database_subnet_cidr) > 0 && length(var.database_subnet_cidr) == var.database_subnet_count && length(var.database_subnet_cidr) <= var.max_azs
