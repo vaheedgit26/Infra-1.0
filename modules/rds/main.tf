@@ -10,7 +10,7 @@ resource "aws_db_subnet_group" "database_subnet_group" {
   )
 }
 
-# create rds instance
+# create RDS instance
 resource "aws_db_instance" "db_instance" {
   identifier              = var.identifier
   availability_zone       = var.availability_zone
