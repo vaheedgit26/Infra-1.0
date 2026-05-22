@@ -18,8 +18,8 @@ resource "aws_db_instance" "db_instance" {
   engine_version          = var.engine_version
   instance_class          = var.instance_class
   allocated_storage       = var.allocated_storage
-  storage_type            = "gp2"
-  storage_encrypted       = true
+  storage_type            = var.storage_type        # "gp2"
+  storage_encrypted       = var.storage_encrypted   # true
   db_name                 = var.db_name
   username                = var.db_username
   password                = var.db_password
