@@ -6,9 +6,7 @@ resource "aws_db_subnet_group" "database_subnet_group" {
 
   tags = merge(
     var.common_tags,
-    {
-        Name = "${local.resource_name}-${var.db_subnet_group_name}"
-    }
+    { Name = "${local.resource_name}-${var.db_subnet_group_name}"}
   )
 }
 
