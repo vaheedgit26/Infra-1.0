@@ -31,8 +31,8 @@ variable "node_disk_size" {
   default     = 20  # minimum 20 GB
 
   validation {
-    condition     = var.node_disk_size >= 8 && var.node_disk_size <= 50
-    error_message = "Disk size must be between 8GB and 25GB."
+    condition     = var.node_disk_size >= 8 && var.node_disk_size <= 30
+    error_message = "Disk size must be between 8GB and 30GB."
   }
 }
 # variable "node_ssh_public_key" { type = string }
