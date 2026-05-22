@@ -13,16 +13,6 @@ variable "common_tags" {
   default = {} 
 }
 
-variable "eks_vpc_public_subnet_tags" {
-  type = map
-  default = {}
-}
-
-variable "eks_vpc_private_subnet_tags" {
-  type = map
-  default = {}
-}
-
 variable "create_nat_gateway" { 
   type = bool 
   default = false
@@ -36,6 +26,21 @@ variable "create_nat_instance" {
 variable "map_public_ip_on_launch" {
   type = bool
   default = true
+}
+
+variable "eks_cluster_name" {
+  type = string
+  default = null
+}
+
+variable "eks_vpc_public_subnet_tags" {
+  type = map
+  default = {}
+}
+
+variable "eks_vpc_private_subnet_tags" {
+  type = map
+  default = {}
 }
 
 ####################################################################
