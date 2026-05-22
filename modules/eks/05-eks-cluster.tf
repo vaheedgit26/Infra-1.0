@@ -41,9 +41,9 @@ resource "aws_security_group_rule" "eks_api_from_bastion" {
   count = ( var.cluster_endpoint_public_access == false || var.enable_bastion_access ) ? 1 : 0
 
   type                     = "ingress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
+  from_port                = 0          # 443
+  to_port                  = 0          # 443
+  protocol                 = "-1"       # "tcp"
   security_group_id        = aws_eks_cluster.main.vpc_config[0].cluster_security_group_id
   source_security_group_id = var.bastion_sg_id
   description              = "Allow bastion to access EKS API"
