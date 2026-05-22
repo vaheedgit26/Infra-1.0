@@ -35,7 +35,7 @@ module "database_sg" {
 }
 
 # NAT Instance Security group rule to allow SSH from remote ip
-resource "aws_security_group_rule" "remote_admin" {
+resource "aws_security_group_rule" "remote_connect" {
   type              = "ingress"
   from_port         = 22
   to_port           = 22
