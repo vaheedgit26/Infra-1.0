@@ -21,5 +21,5 @@ output "database_route_table_id" { value = aws_route_table.database.id }
 output "internet_gateway"        { value = aws_internet_gateway.internet_gateway }
 
 output "eks_cluster_name" {
-  value = var.eks_cluster_name != null ? var.eks_cluster_name : "Normal VPC, Dont have EKS cluster name"
+  value = var.eks_cluster_name != null ? var.eks_cluster_name : "Normal VPC, Doesnt have EKS cluster name"
 }
