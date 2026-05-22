@@ -19,6 +19,7 @@ resource "aws_db_instance" "db_instance" {
   instance_class          = var.instance_class
   allocated_storage       = var.allocated_storage
   storage_type            = "gp2"
+  storage_encrypted       = true
   db_name                 = var.db_name
   username                = var.db_username
   password                = var.db_password
@@ -27,7 +28,6 @@ resource "aws_db_instance" "db_instance" {
   multi_az                = var.env == "prod" ? true : false
   skip_final_snapshot     = var.env == "prod" ? false : true
   backup_retention_period = var.env == "prod" ? 7 : 0
-  storage_encrypted       = true
   deletion_protection     = var.env == "prod" ? true : false
   publicly_accessible     = false
   
