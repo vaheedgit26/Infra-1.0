@@ -16,7 +16,7 @@ resource "aws_eks_cluster" "main" {
   }
 
   access_config {
-    authentication_mode = "API_AND_CONFIG_MAP"            # Three options: CONFIG_MAP, API, API_AND_CONFIG_MAP
+    authentication_mode = "API_AND_CONFIG_MAP"            # Three options: API, CONFIG_MAP, API_AND_CONFIG_MAP
     bootstrap_cluster_creator_admin_permissions = true    # Gives admin access to user who creates this EKS Cluster
   }
 
