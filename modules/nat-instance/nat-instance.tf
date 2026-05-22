@@ -1,6 +1,6 @@
 module "ec2" {
-  # source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/ec2"
-  source = "../ec2"
+  source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/ec2"
+  # source = "../ec2"
 
   ami_id                      = var.ami_id
   instance_type               = var.instance_type
