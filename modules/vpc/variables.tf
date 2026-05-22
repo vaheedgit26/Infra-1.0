@@ -28,6 +28,7 @@ variable "map_public_ip_on_launch" {
   default = true
 }
 
+# EKS related
 variable "eks_cluster_name" {
   type = string
   default = null
