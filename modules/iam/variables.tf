@@ -22,3 +22,8 @@ variable "aws_account_id" {
   description = "AWS Account ID"
   type        = string
 }
+
+#variable "github_org" {
+#  description = "GitHub organization or username that owns zen-pharma-frontend and zen-pharma-backend"
+#  type        = string
+#}
