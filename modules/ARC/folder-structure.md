@@ -41,3 +41,9 @@ jobs:
   build:
     runs-on: [self-hosted, k8s-runners]
 ```
+
+## 🧠 Pro Tips (Production)  
+- Store GitHub token in **AWS Secrets Manager**
+- Restrict IAM policy (avoid `*`)
+- Use custom runner image
+- Add cluster autoscaler  
