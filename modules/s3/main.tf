@@ -13,13 +13,15 @@ resource "aws_s3_bucket" "bucket" {
   lifecycle {
     prevent_destroy = false
   }
-  tags = {
-    Name        = var.s3_bucket_name
-    Environment = var.env
-    Project     = var.project
-    Purpose     = "terraform-backend"
-    Terraform   = "true"
-  }
+  
+  tags = merge(
+    var.common_tags,
+    { 
+      Name    = var.s3_bucket_name 
+      Purpose = "terraform-backend"
+    }
+  )
+
 }
 
 # This will incur some cost
