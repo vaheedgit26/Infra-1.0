@@ -8,6 +8,12 @@ variable "env" {
   type        = string
 }
 
+variable "secret_name" {
+  description = "Secret name to store in Secrets Manager"
+  type        = string
+  # sensitive   = true
+}
+
 variable "db_username" {
   description = "Database username to store in Secrets Manager"
   type        = string
