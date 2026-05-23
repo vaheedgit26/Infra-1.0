@@ -2,8 +2,6 @@
 module "nat_sg" {
     source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/sg"
     
-    project        = var.project
-    env            = var.env
     vpc_id         = var.vpc_id
     sg_name        = "nat_instance_sg"
     sg_description = "NAT Instance Security Group"
@@ -14,8 +12,6 @@ module "nat_sg" {
 module "private_sg" {
     source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/sg"
     
-    project        = var.project
-    env            = var.env
     vpc_id         = var.vpc_id
     sg_name        = "private_instance_sg"
     sg_description = "Private Instance Security Group"
@@ -26,8 +22,6 @@ module "private_sg" {
 module "database_sg" {
     source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/sg"
     
-    project        = var.project
-    env            = var.env
     vpc_id         = var.vpc_id
     sg_name        = "database_instance_sg"
     sg_description = "Database Instance Security Group"
