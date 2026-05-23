@@ -5,7 +5,9 @@ resource "aws_secretsmanager_secret" "db_credentials" {
 
   tags = merge (
     var.common_tags,
-    { Name = "/${var.project}/${var.env}/db-credentials" }
+    { # Name = "/${var.project}/${var.env}/db-credentials" 
+      Name = var.db_secret_name
+    }
   )
 }
 
