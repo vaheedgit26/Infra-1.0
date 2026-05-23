@@ -3,7 +3,7 @@ module "nat_sg" {
     source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/sg"
     
     vpc_id         = var.vpc_id
-    sg_name        = "nat_instance_sg"
+    sg_name        = local.nat-instance-sg
     sg_description = "NAT Instance Security Group"
     common_tags    = var.common_tags
 }
@@ -13,7 +13,7 @@ module "private_sg" {
     source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/sg"
     
     vpc_id         = var.vpc_id
-    sg_name        = "private_instance_sg"
+    sg_name        = local.private-instance-sg
     sg_description = "Private Instance Security Group"
     common_tags    = var.common_tags
 }
@@ -23,7 +23,7 @@ module "database_sg" {
     source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/sg"
     
     vpc_id         = var.vpc_id
-    sg_name        = "database_instance_sg"
+    sg_name        = local.database-instance-sg
     sg_description = "Database Instance Security Group"
     common_tags    = var.common_tags
 }
