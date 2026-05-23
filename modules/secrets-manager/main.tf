@@ -3,12 +3,10 @@ resource "aws_secretsmanager_secret" "db_credentials" {
   description             = "Database credentials for the ${var.project}-${var.env} environment"
   recovery_window_in_days = 0
 
-  tags = {
-    Name    = "/${var.project}/${var.env}/db-credentials"
-    Project = var.project
-    Env     = var.env
-    Terraform = "True"
-  }
+  tags = merge (
+    var.common_tags,
+    { Name = "/${var.project}/${var.env}/db-credentials" }
+  )
 }
 
 resource "aws_secretsmanager_secret_version" "db_credentials" {
