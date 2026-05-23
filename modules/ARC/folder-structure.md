@@ -21,3 +21,23 @@ terraform-hybrid-ci/
 │       ├── main.tf
 │       └── variables.tf
 ```
+## How to use
+```bash
+terraform init
+terraform apply
+```
+
+```bash
+kubectl get pods -n arc-system
+kubectl get pods -n arc-runners
+```
+
+## 🔹 GitHub Workflow Example
+```yaml
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+  build:
+    runs-on: [self-hosted, k8s-runners]
+```
