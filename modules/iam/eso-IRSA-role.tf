@@ -35,7 +35,7 @@ resource "aws_iam_role" "eso_role" {
 
 resource "aws_iam_policy" "eso_secrets_policy" {
   name        = "${var.project}-${var.env}-eso-secrets-policy"
-  description = "Allow External Secrets Operator to read ${var.project} secrets from AWS Secrets Manager"
+  description = "Allow External Secrets Operator to read /${var.project}/${var.env} secrets from AWS Secrets Manager"
 
   policy = jsonencode({
     Version = "2012-10-17"
