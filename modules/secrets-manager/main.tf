@@ -1,10 +1,10 @@
 resource "aws_secretsmanager_secret" "db_credentials" {
-  name                    = "/pharma/${var.env}/db-credentials"
-  description             = "Database credentials for the pharma ${var.env} environment"
+  name                    = "/${var.project}/${var.env}/db-credentials"
+  description             = "Database credentials for the ${var.project}-${var.env} environment"
   recovery_window_in_days = 0
 
   tags = {
-    Name    = "/pharma/${var.env}/db-credentials"
+    Name    = "/${var.project}/${var.env}/db-credentials"
     Env     = var.env
     Project = var.project
   }
