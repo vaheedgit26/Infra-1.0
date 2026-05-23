@@ -4,8 +4,9 @@ variable "sg_description" {}
 variable "vpc_id" {}
 
 ### Tags
-variable "project" {}
-variable "env" {}
+# variable "project" {}
+# variable "env" {}
+
 variable "common_tags" {
   type = map
   default = {}
