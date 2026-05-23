@@ -46,7 +46,7 @@ resource "aws_iam_policy" "eso_secrets_policy" {
           "secretsmanager:GetSecretValue",
           "secretsmanager:DescribeSecret"
         ]
-        Resource = "arn:aws:secretsmanager:*:${var.aws_account_id}:secret:/${var.project}/*"
+        Resource = "arn:aws:secretsmanager:*:${var.aws_account_id}:secret:/${var.project}/${var.env}/*"
       }
     ]
   })
