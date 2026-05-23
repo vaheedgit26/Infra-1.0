@@ -8,6 +8,8 @@ variable "env" {
   type        = string
 }
 
+variable "common_tags" { default = {} }
+
 variable "db_secret_name" {
   description = "Secret name to store in Secrets Manager"
   type        = string
