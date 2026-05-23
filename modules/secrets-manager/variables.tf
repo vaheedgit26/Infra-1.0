@@ -8,7 +8,7 @@ variable "env" {
   type        = string
 }
 
-variable "secret_name" {
+variable "db_secret_name" {
   description = "Secret name to store in Secrets Manager"
   type        = string
   # sensitive   = true
