@@ -1,5 +1,5 @@
-# ArgoCD IRSA Role
-data "aws_iam_policy_document" "argocd_assume_role" {      # Trust Policy
+# ArgoCD IRSA Role ( Trust Policy )
+data "aws_iam_policy_document" "argocd_assume_role" {      
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
     effect  = "Allow"
