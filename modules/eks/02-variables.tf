@@ -45,6 +45,8 @@ variable "desired_capacity" { type = number }
 variable "min_size"         { type = number }
 variable "max_size"         { type = number }
 
+variable "node_auto_scaler_tags" { default = {} }
+
 ############################################     Variables for Tagging subnets for ELB    #######################################################################
 # variable "public_subnet_ids"  { type = list(string) }
 # variable "private_subnet_ids" { type = list(string) }
