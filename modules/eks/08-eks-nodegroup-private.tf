@@ -39,10 +39,13 @@ resource "aws_eks_node_group" "main" {
     aws_iam_role_policy_attachment.node_AmazonEC2ContainerRegistryReadOnly
   ]
 
-  tags = {
-    Name      = "${var.cluster_name}-node-group"
-    Project   = var.project
-    Env       = var.env
-    Terraform = true
-  }
+  tags = merge(
+    {
+      Name      = "${var.cluster_name}-node-group"
+      Project   = var.project
+      Env       = var.env
+      Terraform = true
+     },
+     var.node_auto_scaler_tags
+  )
 }
