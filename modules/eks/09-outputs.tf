@@ -3,7 +3,7 @@ output "cluster_name" {
   value       = aws_eks_cluster.main.name
 }
 
-output "cluster_name" {
+output "cluster_version" {
   description = "Name of the EKS cluster"
   value       = aws_eks_cluster.main.version
 }
