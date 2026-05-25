@@ -45,7 +45,7 @@ resource "aws_eks_node_group" "main" {
       Project   = var.project
       Env       = var.env
       Terraform = true
-     },
-     var.node_auto_scaler_tags
+    },
+    var.node_auto_scaler_tags
   )
 }
