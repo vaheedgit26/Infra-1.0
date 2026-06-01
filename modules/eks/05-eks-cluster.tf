@@ -36,7 +36,7 @@ resource "aws_eks_cluster" "main" {
 
 }
 
-# Allowing access to Bastion Host
+# Allowing access from Bastion Host
 resource "aws_security_group_rule" "eks_api_from_bastion" {
   count = ( var.cluster_endpoint_public_access == false || var.enable_bastion_access ) ? 1 : 0
 
