@@ -27,3 +27,10 @@ variable "db_password" {
   type        = string
   sensitive   = true
 }
+
+variable "jwt_secret" {
+  description = "JWT token to store in Secrets Manager"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
