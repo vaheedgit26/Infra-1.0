@@ -32,5 +32,5 @@ variable "jwt_secret" {
   description = "JWT token to store in Secrets Manager"
   type        = string
   sensitive   = true
-  default     = ""
+  default     = "this-is-default-jwt-web-token-created"
 }
