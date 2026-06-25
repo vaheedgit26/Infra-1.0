@@ -34,7 +34,7 @@ resource "aws_db_instance" "db_instance" {
   tags = merge(
     var.common_tags,
     {
-        Name = "${local.resource_name}-${var.identifier}"
+        Name = var.identifier
     }
   )
 }
