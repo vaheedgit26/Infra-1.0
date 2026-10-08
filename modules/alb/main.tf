@@ -1,19 +1,19 @@
 # Create ALB
 resource "aws_lb" "alb" {
-  name                       = "${var.alb_name}-alb-${local.alb_type}" # "${local.resource_name}-alb-${local.alb_type}"
+  name                       = "${var.alb_name}-alb-${local.alb_type}"
   internal                   = var.internal
   load_balancer_type         = "application"
   security_groups            = var.alb_sg_ids
   subnets                    = var.subnets
   enable_deletion_protection = false
 
-  #depends_on         = [aws_internet_gateway.igw_vpc]
+  # depends_on         = [aws_internet_gateway.igw_vpc]
 
   tags = merge(
     var.alb_tags,
     var.common_tags,
     {
-      Name = "${local.alb_type}-${var.project_name}-${var.env}-alb"
+      Name = "${local.alb_type}-${var.project}-${var.env}-alb"
     }
   )
 }
@@ -38,9 +38,9 @@ resource "aws_lb_listener" "http" {
 }
 
 # Create a Listener rule for ALB
-resource "aws_lb_listener_rule" "backend" {
-  listener_arn = aws_lb_listener.http.arn #local.app_alb_listener_arn
-  priority     = 100                      # low priority will be evaluated first
+resource "aws_lb_listener_rule" "app" {
+  listener_arn = aws_lb_listener.http.arn       # local.app_alb_listener_arn
+  priority     = 100                            # low priority will be evaluated first
 
   action {
     type             = "forward"
@@ -65,7 +65,7 @@ resource "aws_lb_target_group" "backend_app_target_group" {
   name        = var.target_group_name                  # max 32 characters long
   port        = 8080
   protocol    = "HTTP"
-  vpc_id      = local.vpc_id
+  vpc_id      = var.vpc_id
   target_type = "ip"
   deregistration_delay = 30
 
