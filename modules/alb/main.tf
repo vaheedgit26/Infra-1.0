@@ -81,20 +81,6 @@ resource "aws_lb_listener" "https" {
   }
 }
 
-# Create DNS record
-resource "aws_route53_record" "www" {
-  zone_id = var.zone_id
-  name    = "*.daws90s.shop" # *.daws90s.shop
-  type    = "A"
-
-  alias {
-    # AWS details
-    name                   = aws_lb.public_alb.dns_name
-    zone_id                = aws_lb.public_alb.zone_id
-    evaluate_target_health = true
-  }
-  allow_overwrite = true
-}
 
 # create a listener on port 80 with redirect action to 443 (http ---> https)
 # resource "aws_lb_listener" "alb_http_listener" {
@@ -112,6 +98,7 @@ resource "aws_route53_record" "www" {
 #     }
 #   }
 # }
+
 
 # Create a Listener rule for ALB
 resource "aws_lb_listener_rule" "backend" {
@@ -134,5 +121,21 @@ resource "aws_lb_listener_rule" "backend" {
   #       values = ["${var.backend_tags.Component}.app-${var.environment}.${var.zone_name}"]  # backend.app-dev.daws81s.online
   #     }
   #   }
+}
+
+
+# Create DNS record
+resource "aws_route53_record" "www" {
+  zone_id = var.zone_id
+  name    = "*.daws90s.shop" # *.daws90s.shop
+  type    = "A"
+
+  alias {
+    # AWS details
+    name                   = aws_lb.public_alb.dns_name
+    zone_id                = aws_lb.public_alb.zone_id
+    evaluate_target_health = true
+  }
+  allow_overwrite = true
 }
 */
