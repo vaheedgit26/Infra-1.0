@@ -60,7 +60,7 @@ resource "aws_lb_listener_rule" "backend" {
   #   }
 }
 
-# create target group
+# Create Target Group
 resource "aws_lb_target_group" "backend_app_target_group" {
   name        = var.target_group_name                  # max 32 characters long
   port        = 8080
