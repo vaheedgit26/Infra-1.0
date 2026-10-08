@@ -62,7 +62,7 @@ resource "aws_lb_listener_rule" "app" {
 
 # Create Target Group
 resource "aws_lb_target_group" "backend_app_target_group" {
-  name        = var.target_group_name                  # max 32 characters long
+  name        = var.tg_name                  # max 32 characters long
   port        = 8080
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
