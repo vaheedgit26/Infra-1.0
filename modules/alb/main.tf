@@ -37,6 +37,29 @@ resource "aws_lb_listener" "http" {
   }
 }
 
+# Create a Listener rule for ALB
+resource "aws_lb_listener_rule" "backend" {
+  listener_arn = aws_lb_listener.http.arn #local.app_alb_listener_arn
+  priority     = 100                      # low priority will be evaluated first
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.backend_app_target_group.arn #aws_lb_target_group.backend.arn
+  }
+
+  condition {
+    path_pattern {
+      values = ["/*"] # This matches all paths
+    }
+  }
+
+  #   condition {
+  #     host_header {
+  #       values = ["${var.backend_tags.Component}.app-${var.environment}.${var.zone_name}"]  # backend.app-dev.daws81s.online
+  #     }
+  #   }
+}
+
 ###########################################################################################################################
 /*
 # Create HTTPS Listener
@@ -89,4 +112,27 @@ resource "aws_route53_record" "www" {
 #     }
 #   }
 # }
+
+# Create a Listener rule for ALB
+resource "aws_lb_listener_rule" "backend" {
+  listener_arn = aws_lb_listener.http.arn #local.app_alb_listener_arn
+  priority     = 100                      # low priority will be evaluated first
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.backend_app_target_group.arn #aws_lb_target_group.backend.arn
+  }
+
+  condition {
+    path_pattern {
+      values = ["/*"] # This matches all paths
+    }
+  }
+
+  #   condition {
+  #     host_header {
+  #       values = ["${var.backend_tags.Component}.app-${var.environment}.${var.zone_name}"]  # backend.app-dev.daws81s.online
+  #     }
+  #   }
+}
 */
