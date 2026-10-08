@@ -72,4 +72,21 @@ resource "aws_route53_record" "www" {
   }
   allow_overwrite = true
 }
+
+# create a listener on port 80 with redirect action to 443 (http ---> https)
+# resource "aws_lb_listener" "alb_http_listener" {
+#   load_balancer_arn = aws_lb.application_load_balancer.arn
+#   port              = 80
+#   protocol          = "HTTP"
+
+#   default_action {
+#     type = "redirect"
+
+#     redirect {
+#       port        = 443
+#       protocol    = "HTTPS"
+#       status_code = "HTTP_301"
+#     }
+#   }
+# }
 */
