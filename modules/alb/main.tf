@@ -18,7 +18,7 @@ resource "aws_lb" "alb" {
   )
 }
 
-# create Listener for ALB
+# create HTTP Listener for ALB
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.alb.arn
   port              = "80"
@@ -34,3 +34,24 @@ resource "aws_lb_listener" "http" {
     }
   }
 }
+
+###########################################################################################################################
+/*
+Create HTTPS Listener
+resource "aws_lb_listener" "https" {
+  load_balancer_arn = aws_lb.public_alb.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = local.certificate_arn
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/html"
+      message_body = "<h1>Hi, I am from HTTPS Frontend ALB</h1>"
+      status_code  = "200"
+    }
+  }
+}*/
