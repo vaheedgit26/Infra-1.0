@@ -31,7 +31,7 @@ resource "aws_lb_listener" "http" {
 
     fixed_response {
       content_type = "text/html"
-      message_body = "<center><h1>Hello, I am from backend APP ALB</h1></center>"
+      message_body = "<center><h1>Hello, I am from Shopverse Frontend ALB</h1></center>"
       status_code  = "200"
     }
   }
@@ -49,15 +49,9 @@ resource "aws_lb_listener_rule" "app" {
 
   condition {
     path_pattern {
-      values = ["/*"] # This matches all paths
+      values = ["/*"]        # This matches all paths
     }
   }
-
-  #   condition {
-  #     host_header {
-  #       values = ["${var.backend_tags.Component}.app-${var.environment}.${var.zone_name}"]  # backend.app-dev.daws81s.online
-  #     }
-  #   }
 }
 
 # Create Target Group
