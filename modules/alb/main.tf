@@ -20,6 +20,8 @@ resource "aws_lb" "alb" {
 
 # create HTTP Listener for ALB
 resource "aws_lb_listener" "http" {
+  count = var.http ? 1 : 0
+
   load_balancer_arn = aws_lb.alb.arn
   port              = "80"
   protocol          = "HTTP"
@@ -37,7 +39,7 @@ resource "aws_lb_listener" "http" {
 
 ###########################################################################################################################
 /*
-Create HTTPS Listener
+# Create HTTPS Listener
 resource "aws_lb_listener" "https" {
   load_balancer_arn = aws_lb.public_alb.arn
   port              = "443"
@@ -54,4 +56,20 @@ resource "aws_lb_listener" "https" {
       status_code  = "200"
     }
   }
-}*/
+}
+
+# Create DNS record
+resource "aws_route53_record" "www" {
+  zone_id = var.zone_id
+  name    = "*.daws90s.shop" # *.daws90s.shop
+  type    = "A"
+
+  alias {
+    # AWS details
+    name                   = aws_lb.public_alb.dns_name
+    zone_id                = aws_lb.public_alb.zone_id
+    evaluate_target_health = true
+  }
+  allow_overwrite = true
+}
+*/
