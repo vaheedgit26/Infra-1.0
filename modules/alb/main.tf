@@ -17,3 +17,20 @@ resource "aws_lb" "application_load_balancer" {
     }
   )
 }
+
+# create Listener for ALB
+resource "aws_lb_listener" "http" {
+  load_balancer_arn = module.alb.alb_arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/html"
+      message_body = "<center><h1>Hello, I am from backend APP ALB</h1></center>"
+      status_code  = "200"
+    }
+  }
+}
