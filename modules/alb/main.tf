@@ -1,5 +1,5 @@
 # Create ALB
-resource "aws_lb" "application_load_balancer" {
+resource "aws_lb" "alb" {
   name                       = "${local.resource_name}-alb-${local.alb_type}"
   internal                   = var.internal
   load_balancer_type         = "application"
@@ -20,7 +20,7 @@ resource "aws_lb" "application_load_balancer" {
 
 # create Listener for ALB
 resource "aws_lb_listener" "http" {
-  load_balancer_arn = module.alb.alb_arn
+  load_balancer_arn = aws_lb.alb.arn
   port              = "80"
   protocol          = "HTTP"
 
