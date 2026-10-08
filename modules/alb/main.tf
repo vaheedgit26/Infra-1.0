@@ -1,6 +1,6 @@
 # Create ALB
 resource "aws_lb" "alb" {
-  name                       = "${local.resource_name}-alb-${local.alb_type}"
+  name                       = "${var.alb_name}-alb-${local.alb_type}" # "${local.resource_name}-alb-${local.alb_type}"
   internal                   = var.internal
   load_balancer_type         = "application"
   security_groups            = var.alb_sg_ids
@@ -62,7 +62,7 @@ resource "aws_lb_listener_rule" "backend" {
 
 # create target group
 resource "aws_lb_target_group" "backend_app_target_group" {
-  name        = "${local.resource_name}-backend-app-tg"     # "${local.resource_name}-backend-app-alb-target-group"  # max 32 characters long
+  name        = var.target_group_name                  # max 32 characters long
   port        = 8080
   protocol    = "HTTP"
   vpc_id      = local.vpc_id
