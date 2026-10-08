@@ -76,7 +76,7 @@ resource "aws_lb_target_group" "backend_app_target_group" {
     interval            = 60
     matcher             = "200-299"    # 200
     path                = "/health"    # "/"
-    port                = 8080
+    port                = 8080         # "traffic-port"
     protocol            = "HTTP"
     timeout             = 10
   }
