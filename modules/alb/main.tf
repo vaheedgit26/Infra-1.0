@@ -94,7 +94,7 @@ resource "aws_lb_listener" "https" {
   load_balancer_arn = aws_lb.public_alb.arn
   port              = "443"
   protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"   # "ELBSecurityPolicy-TLS13-1-2-2021-06"
   certificate_arn   = local.certificate_arn
 
   default_action {
@@ -105,6 +105,12 @@ resource "aws_lb_listener" "https" {
       message_body = "<h1>Hi, I am from HTTPS Frontend ALB</h1>"
       status_code  = "200"
     }
+
+    default_action {
+      type             = "forward"
+      target_group_arn = aws_lb_target_group.frontend.arn
+    }
+
   }
 }
 
