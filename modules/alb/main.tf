@@ -5,7 +5,7 @@ resource "aws_lb" "alb" {
   load_balancer_type         = "application"
   security_groups            = var.alb_sg_ids
   subnets                    = var.subnets
-  enable_deletion_protection = false
+  enable_deletion_protection = false      # For production: true
 
   # depends_on         = [aws_internet_gateway.igw_vpc]
 
