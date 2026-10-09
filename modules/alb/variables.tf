@@ -38,11 +38,11 @@ variable "acm_certificate_arn" {
 variable "listener_mode" {
   description = "Listener mode: http_only, https_only, or http_to_https"
   type        = string
-  default     = "http"         # "http_to_https"
+  default     = "http"         # "http", "https" "http_to_https"
 
   validation {
     condition = contains(
-      ["http_only", "https_only", "http_to_https"],
+      ["http", "https", "http_to_https"],
       var.listener_mode
     )
     error_message = "Choose http_only, https_only, or http_to_https."
