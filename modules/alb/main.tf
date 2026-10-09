@@ -55,39 +55,16 @@ resource "aws_lb_listener_rule" "app" {
 }
 
 # Create Target Group
-resource "aws_lb_target_group" "backend_app_target_group" {
-  name        = var.tg_name                  # max 32 characters long
-  port        = 8080
-  protocol    = "HTTP"
-  vpc_id      = var.vpc_id
-  target_type = "ip"
-  deregistration_delay = 30
-
-  health_check {
-    enabled             = true
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    interval            = 60
-    matcher             = "200-299"    # 200
-    path                = "/health"    # "/"
-    port                = 8080         # "traffic-port"
-    protocol            = "HTTP"
-    timeout             = 10
-  }
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
 resource "aws_lb_target_group" "service" {
   for_each = var.services
 
   name        = each.value.tg_name
   port        = each.value.port
   protocol    = "HTTP"
-  target_type = var.target_type   # default: "ip"
+  target_type = var.target_type        # default: "ip"
   vpc_id      = var.vpc_id
+
+  # deregistration_delay = 30
 
   health_check {
     enabled             = true
@@ -101,8 +78,12 @@ resource "aws_lb_target_group" "service" {
     matcher             = "200-399"
   }
 
-  tags = merge(var.tags, {
-    Name    = "${var.name}-${each.key}"
+  lifecycle {
+    create_before_destroy = true
+  }
+
+  tags = merge(var.common_tags, {
+    Name    = "${each.value.tg_name}"
     Service = each.key
   })
 }
