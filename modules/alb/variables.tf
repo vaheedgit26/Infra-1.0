@@ -3,7 +3,6 @@ variable "internal" {}
 variable "alb_sg_ids" { type = list }
 variable "subnets" { type = list }
 variable "vpc_id" {}
-variable "tg_name" { type = list }
 
 variable "http" { 
   type    = boolean 
