@@ -20,7 +20,7 @@ resource "aws_lb" "alb" {
 
 # create HTTP Listener for ALB
 resource "aws_lb_listener" "http" {
-  count = var.http ? 1 : 0
+  count = var.listener_mode == "http" ? 1 : 0
 
   load_balancer_arn = aws_lb.alb.arn
   port              = "80"
@@ -33,6 +33,58 @@ resource "aws_lb_listener" "http" {
       content_type = "text/html"
       message_body = "<center><h1>Hello, I am from Shopverse Frontend ALB</h1></center>"
       status_code  = "200"
+    }
+  }
+}
+
+# Create HTTPS Listener
+resource "aws_lb_listener" "https" {
+  count = var.listener_mode == "https_only" ||
+          var.listener_mode == "http_to_https" ? 1 : 0
+
+  load_balancer_arn = aws_lb.this.arn
+  port              = 443
+  protocol          = "HTTPS"
+
+  certificate_arn = var.acm_certificate_arn
+  ssl_policy      = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "Not Found"
+      status_code  = "404"
+    }
+  }
+
+  lifecycle {
+    precondition {
+      condition = (
+        var.acm_certificate_arn != null &&
+        trimspace(coalesce(var.acm_certificate_arn, "")) != ""
+      )
+      error_message = "An ACM certificate ARN is required for HTTPS listener modes."
+    }
+  }
+}
+
+# Redirect HTTP to HTTPS
+resource "aws_lb_listener" "http_redirect" {
+  count = var.listener_mode == "http_to_https" ? 1 : 0
+
+  load_balancer_arn = aws_lb.this.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
     }
   }
 }
