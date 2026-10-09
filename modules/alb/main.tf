@@ -38,18 +38,20 @@ resource "aws_lb_listener" "http" {
 }
 
 # Create a Listener rule for ALB
-resource "aws_lb_listener_rule" "app" {
-  listener_arn = aws_lb_listener.http.arn       # local.app_alb_listener_arn
-  priority     = 100                            # low priority will be evaluated first
+resource "aws_lb_listener_rule" "service" {
+  for_each = var.services
+
+  listener_arn = aws_lb_listener.http.arn
+  priority     = each.value.priority
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.backend_app_target_group.arn #aws_lb_target_group.backend.arn
+    target_group_arn = aws_lb_target_group.service[each.key].arn
   }
 
   condition {
     path_pattern {
-      values = ["/*"]        # This matches all paths
+      values = each.value.path_patterns
     }
   }
 }
@@ -134,6 +136,23 @@ resource "aws_lb_listener" "https" {
 #   }
 # }
 
+resource "aws_lb_listener_rule" "service" {
+  for_each = var.services
+
+  listener_arn = aws_lb_listener.https.arn
+  priority     = each.value.priority
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.service[each.key].arn
+  }
+
+  condition {
+    path_pattern {
+      values = each.value.path_patterns
+    }
+  }
+}
 
 # Create a Listener rule for ALB
 resource "aws_lb_listener_rule" "backend" {
