@@ -39,8 +39,7 @@ resource "aws_lb_listener" "http" {
 
 # Create HTTPS Listener
 resource "aws_lb_listener" "https" {
-  count = var.listener_mode == "https_only" ||
-          var.listener_mode == "http_to_https" ? 1 : 0
+  count = var.listener_mode == "https_only" || var.listener_mode == "http_to_https" ? 1 : 0
 
   load_balancer_arn = aws_lb.alb.arn
   port              = 443
