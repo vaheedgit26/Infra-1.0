@@ -14,10 +14,17 @@ output "http_listener_arn" {
   value = aws_lb_listener.http.arn
 }
 
-output "frontend_target_group_arn" {
-  value = aws_lb_target_group.frontend.arn
+output "target_group_arns" {
+  description = "Target group ARNs indexed by microservice name"
+
+  value = {
+    for name, target_group in aws_lb_target_group.service :
+    name => target_group.arn
+  }
 }
 
-output "frontend_target_group_name" {
-  value = aws_lb_target_group.frontend.name
-}
+# Your environment can then access individual target groups:
+
+# module.alb.target_group_arns["backend"]
+# module.alb.target_group_arns["frontend"]
+# module.alb.target_group_arns["orders"]
