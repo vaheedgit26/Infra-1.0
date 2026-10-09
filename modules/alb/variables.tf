@@ -4,19 +4,49 @@ variable "alb_sg_ids" { type = list }
 variable "subnets" { type = list }
 variable "vpc_id" {}
 
-variable "http" { 
-  type    = boolean 
-  default = true 
+variable "http_only" {
+  description = "Create an HTTP listener only"
+  type        = bool
+  default     = false
 }
 
-variable "https" { 
-  type    = boolean 
-  default = false
+variable "http_only" {
+  description = "Create an HTTP listener only"
+  type        = bool
+  default     = false
 }
 
-variable "http_to_https" { 
-  type = boolean 
-  default = false
+variable "https_only" {
+  description = "Create an HTTPS listener only"
+  type        = bool
+  default     = false
+}
+
+variable "http_to_https" {
+  description = "Create HTTP redirect and HTTPS application listeners"
+  type        = bool
+  default     = false
+}
+
+variable "acm_certificate_arn" {
+  description = "ACM certificate ARN required for HTTPS modes"
+  type        = string
+  default     = null
+  nullable    = true
+}
+
+variable "listener_mode" {
+  description = "Listener mode: http_only, https_only, or http_to_https"
+  type        = string
+  default     = "http"         # "http_to_https"
+
+  validation {
+    condition = contains(
+      ["http_only", "https_only", "http_to_https"],
+      var.listener_mode
+    )
+    error_message = "Choose http_only, https_only, or http_to_https."
+  }
 }
 
 variable "target_type" {
