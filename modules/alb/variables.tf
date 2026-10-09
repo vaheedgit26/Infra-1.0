@@ -4,19 +4,13 @@ variable "alb_sg_ids" { type = list }
 variable "subnets" { type = list }
 variable "vpc_id" {}
 
-variable "http_only" {
+variable "http" {
   description = "Create an HTTP listener only"
   type        = bool
   default     = false
 }
 
-variable "http_only" {
-  description = "Create an HTTP listener only"
-  type        = bool
-  default     = false
-}
-
-variable "https_only" {
+variable "https" {
   description = "Create an HTTPS listener only"
   type        = bool
   default     = false
