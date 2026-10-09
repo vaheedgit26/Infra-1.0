@@ -80,6 +80,33 @@ resource "aws_lb_target_group" "backend_app_target_group" {
   }
 }
 
+resource "aws_lb_target_group" "service" {
+  for_each = var.services
+
+  name        = each.value.tg_name
+  port        = each.value.port
+  protocol    = "HTTP"
+  target_type = var.target_type   # default: "ip"
+  vpc_id      = var.vpc_id
+
+  health_check {
+    enabled             = true
+    protocol            = "HTTP"
+    port                = "traffic-port"
+    path                = each.value.health_path
+    healthy_threshold   = 2
+    unhealthy_threshold = 3
+    timeout             = 5
+    interval            = 30
+    matcher             = "200-399"
+  }
+
+  tags = merge(var.tags, {
+    Name    = "${var.name}-${each.key}"
+    Service = each.key
+  })
+}
+
 
 ###########################################################################################################################
 /*
