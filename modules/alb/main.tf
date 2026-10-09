@@ -1,6 +1,6 @@
 # Create ALB
 resource "aws_lb" "alb" {
-  name                       = "${var.alb_name}-alb-${local.alb_type}"
+  name                       = "${var.alb_name}-${local.alb_type}"
   internal                   = var.internal
   load_balancer_type         = "application"
   security_groups            = var.alb_sg_ids
