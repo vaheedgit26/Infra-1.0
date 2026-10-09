@@ -20,6 +20,11 @@ variable "http_to_https" {
   default = false
 }
 
+variable "target_type" {
+  type = string
+  default = "ip"
+}
+
 variable "project_name" {}
 variable "env" {}
 variable "common_tags" { type = map }
