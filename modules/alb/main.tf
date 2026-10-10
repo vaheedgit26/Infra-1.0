@@ -92,7 +92,7 @@ resource "aws_lb_listener" "http_redirect" {
 resource "aws_lb_listener_rule" "service" {
   for_each = var.services
 
-  listener_arn = aws_lb_listener.http.arn
+  listener_arn = aws_lb_listener.http[0].arn
   priority     = each.value.priority
 
   action {
