@@ -1,4 +1,4 @@
 locals {
-  resource_name = "${var.project_name}-${var.env}"
+  resource_name = "${var.project}-${var.env}"
   alb_type      = var.internal ? "internal" : "external"
 }
