@@ -48,7 +48,7 @@ variable "target_type" {
   default = "ip"
 }
 
-variable "project_name" {}
+variable "project" {}
 variable "env" {}
 variable "common_tags" { type = map }
 
