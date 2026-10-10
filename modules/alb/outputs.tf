@@ -11,7 +11,7 @@ output "alb_zone_id" {
 }
 
 output "http_listener_arn" {
-  value = aws_lb_listener.http.arn
+  value = aws_lb_listener.http[0].arn
 }
 
 output "target_group_arns" {
